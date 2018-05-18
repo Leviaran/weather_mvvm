@@ -1,11 +1,45 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
+    <style name="TextErrorStyle" parent="@android:style/TextAppearance.Large">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/textError</item>
+        <item name="android:font">@font/roboto_black</item>
+        <item name="android:textSize">54sp</item>
+    </style>
+
+    <style name="TextTemp" parent="@android:style/TextAppearance.Large">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/textGeneralTemp</item>
+        <item name="android:font">@font/roboto_black</item>
+        <item name="android:textSize">96sp</item>
+    </style>
+
+    <style name="TextLocation" parent="@android:style/TextAppearance.Large">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/textLocation</item>
+        <item name="android:font">@font/roboto_thin</item>
+        <item name="android:textSize">36sp</item>
+    </style>
+
+    <style name="TextTempDetail" parent="@android:style/TextAppearance.Large">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/textGeneralTemp</item>
+        <item name="android:font">@font/roboto_regular</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+
 
 </resources>

@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Gojek_Android_Asignment</string>
+    <string name="textError">Something went wrong at our end!</string>
+    <string name="retry">RETRY</string>
+    <string name="exampleDegree">21°</string>
+    <string name="exampleLocation">Bangalore</string>
 </resources>

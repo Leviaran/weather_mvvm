@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="progress_size">96dp</dimen>
+    <dimen name="padding_text_error">40dp</dimen>
+    <dimen name="margin_top_button">44dp</dimen>
+    <dimen name="margin_top_textTemp">56dp</dimen>
+    <dimen name="margin_top_textLocation">16dp</dimen>
+    <dimen name="margin_peek_bottom">88dp</dimen>
+    <dimen name="margin_top_temp_bottom_sheet">24dp</dimen>
+    <dimen name="margin_bottom_temp_bottom_sheet">24dp</dimen>
+    <dimen name="margin_text_temp_detail">20dp</dimen>
+
+</resources>
