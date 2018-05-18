@@ -13,7 +13,6 @@
         android:layout_height="110dp"
         android:layout_marginTop="@dimen/margin_top_textTemp"
         android:text="@string/exampleDegree"
-        android:textAlignment=
         style="@style/TextTemp"
         android:layout_gravity="center_horizontal" />
 
