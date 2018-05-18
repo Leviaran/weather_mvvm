@@ -15,6 +15,11 @@ project.ext {
     timberVersion = "4.6.0"
     lifecycleVersion = "1.1.0"
     dexversion = "1.0.3"
+    retrofitVersion = "2.4.0"
+    rxJavaAdapterVersion = "2.3.0"
+    moshiVersion = "1.4.0"
+    moshiAdapterVersion = "2.3.0"
+
 }
 
 android {
@@ -72,6 +77,14 @@ dependencies {
     implementation "android.arch.lifecycle:runtime:$project.lifecycleVersion"
     implementation "android.arch.lifecycle:extensions:$project.lifecycleVersion"
     kapt "android.arch.lifecycle:compiler:$project.lifecycleVersion"
+
+    //Retrofit networking
+    implementation "com.squareup.retrofit2:retrofit:$project.retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$project.rxJavaAdapterVersion"
+
+    //Moshi Adapter Json
+    implementation "com.squareup.moshi:moshi:$project.moshiVersion"
+    implementation "com.squareup.retrofit2:converter-moshi:$project.moshiAdapterVersion"
 
     //dex
 //    compile "com.android.support:multidex:$project.dexversion"
