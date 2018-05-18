@@ -3,12 +3,13 @@ package ran.singletondev.gojek_android_asignment.rx
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
 /**
  * Created by ran on 5/18/18.
  */
 
-class SchedulersFacade {
+class SchedulersFacade @Inject constructor() {
     fun io() : Scheduler = Schedulers.io()
 
     fun computation() : Scheduler = Schedulers.computation()

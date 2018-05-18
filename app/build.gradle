@@ -19,6 +19,7 @@ project.ext {
     rxJavaAdapterVersion = "2.3.0"
     moshiVersion = "1.4.0"
     moshiAdapterVersion = "2.3.0"
+    loggingHttpVersion = "3.9.1"
 
 }
 
@@ -81,6 +82,7 @@ dependencies {
     //Retrofit networking
     implementation "com.squareup.retrofit2:retrofit:$project.retrofitVersion"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$project.rxJavaAdapterVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$project.loggingHttpVersion"
 
     //Moshi Adapter Json
     implementation "com.squareup.moshi:moshi:$project.moshiVersion"

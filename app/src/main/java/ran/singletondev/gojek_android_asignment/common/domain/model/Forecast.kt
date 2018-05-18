@@ -1,5 +1,6 @@
 package ran.singletondev.gojek_android_asignment.common.domain.model
 
+import com.squareup.moshi.Json
 import io.reactivex.Single
 
 /**
@@ -8,9 +9,7 @@ import io.reactivex.Single
 
 
 class Forecast (
-        var location : Location,
-        var current: Current,
-        var forecastDetail: ForecastDetail
-) {
-
-}
+        @Json(name = "location") var location : Location,
+        @Json(name = "current") var current: Current,
+        @Json(name = "forecastDetail") var forecastDetail: ForecastDetail
+)
