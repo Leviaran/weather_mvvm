@@ -11,5 +11,5 @@ import io.reactivex.Single
 class Forecast (
         @Json(name = "location") var location : Location,
         @Json(name = "current") var current: Current,
-        @Json(name = "forecastDetail") var forecastDetail: ForecastDetail
+        @Json(name = "forecast") var forecast: ForecastDetail
 )

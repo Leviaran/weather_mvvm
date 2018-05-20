@@ -39,11 +39,10 @@ class ForecastViewModel @Inject constructor (
                 forecastUseCase.getForecast()
                         .subscribeOn(schedulersFacade.io())
                         .observeOn(schedulersFacade.ui())
-                        .subscribe()
-//                        .doOnSubscribe { response.value = Response.loading() }
-//                        .subscribe({forecast -> response.value = Response.success(forecast)}){
-//                            throwable -> response.value = Response.error(throwable)
-//                        }
+                        .doOnSubscribe { response.value = Response.loading() }
+                        .subscribe({forecast -> response.value = Response.success(forecast)}){
+                            throwable -> response.value = Response.error(throwable)
+                        }
         )
     }
 

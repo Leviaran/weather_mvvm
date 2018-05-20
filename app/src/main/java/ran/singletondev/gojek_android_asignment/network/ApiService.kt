@@ -12,6 +12,6 @@ import retrofit2.http.GET
 const val apiBaseUrl : String = "https://api.apixu.com/"
 
 interface ApiService {
-    @GET("v1/forecast.json?key=f4c0e1eecb164304b16200950181705&q=Paris&days=7")
+    @GET("v1/forecast.json?key=f4c0e1eecb164304b16200950181705&q=Paris&days=5")
     fun getForecast() : Single<Forecast>
 }
