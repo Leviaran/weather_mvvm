@@ -5,14 +5,13 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
+import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.View
-import android.widget.TextView
-import android.widget.Toast
 import butterknife.BindView
 import butterknife.ButterKnife
 import dagger.android.AndroidInjection
@@ -25,8 +24,12 @@ import ran.singletondev.gojek_android_asignment.dashboard.common.Utils
 import timber.log.Timber
 import javax.inject.Inject
 import android.support.v7.widget.DividerItemDecoration
-import android.widget.LinearLayout
-import android.widget.ProgressBar
+import android.widget.*
+import butterknife.OnClick
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
+import java.util.concurrent.TimeUnit
 
 
 /**
@@ -65,6 +68,8 @@ class ForecastActivity : AppCompatActivity() {
     private lateinit var forecastViewModel: ForecastViewModel
 
     private lateinit var recyclerAdapter : RecyclerAdapter
+
+    private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -111,11 +116,17 @@ class ForecastActivity : AppCompatActivity() {
 
     private fun renderDataState(forecast : Forecast?) {
         Timber.e("Yesss")
-        Timber.e(forecast?.forecast.toString())
+
         mainMenuView()
 
         insertIntoRecycler(forecast)
         insertIntoMainUI(forecast)
+
+        Observable.just("Fake animation")
+                .observeOn(AndroidSchedulers.mainThread())
+                .delay(200, TimeUnit.MILLISECONDS)
+                .doOnNext { triggerBottomSheet() }
+                .subscribe()
 
     }
 
@@ -143,6 +154,11 @@ class ForecastActivity : AppCompatActivity() {
         textLocation.text = forecast?.location?.name
     }
 
+    @OnClick(R.id.refresh_btn)
+    fun refreshBtnClicked(){
+        forecastViewModel.loadDataForecast()
+    }
+
     fun loadingView(){
         progress.visibility = View.VISIBLE
 
@@ -168,4 +184,20 @@ class ForecastActivity : AppCompatActivity() {
         progress.visibility = View.GONE
 
     }
+
+    fun triggerBottomSheet(){
+        bottomSheetBehavior = BottomSheetBehavior.from(bottom_sheet_layout)
+
+        when {
+            bottomSheetBehavior.state != BottomSheetBehavior.STATE_EXPANDED -> {
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+                Timber.e("clicked")
+            }
+            else -> {
+                bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+                Timber.e("clicked else")
+            }
+        }
+    }
+
 }

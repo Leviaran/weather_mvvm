@@ -2,6 +2,7 @@
 <resources>
 
     <dimen name="progress_size">96dp</dimen>
+    <dimen name="size_progress_with_padding">110dp</dimen>
     <dimen name="padding_text_error">40dp</dimen>
     <dimen name="margin_top_button">44dp</dimen>
     <dimen name="margin_top_textTemp">56dp</dimen>
