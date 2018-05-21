@@ -4,7 +4,13 @@ import android.annotation.SuppressLint
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.Geocoder
+import android.location.Location
 import android.os.Bundle
+import android.os.Handler
+import android.os.ResultReceiver
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.app.AppCompatActivity
@@ -26,6 +32,10 @@ import javax.inject.Inject
 import android.support.v7.widget.DividerItemDecoration
 import android.widget.*
 import butterknife.OnClick
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationResult
+import com.google.android.gms.location.LocationServices
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -96,6 +106,7 @@ class ForecastActivity : AppCompatActivity() {
         forecastViewModel.response().observe(this, Observer { response -> processResponse(response) })
 
         forecastViewModel.loadDataForecast()
+
 
     }
 
