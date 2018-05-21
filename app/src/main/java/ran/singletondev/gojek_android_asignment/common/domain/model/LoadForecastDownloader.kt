@@ -9,8 +9,8 @@ import javax.inject.Inject
  */
 
 class LoadForecastDownloader @Inject constructor(private val apiService: ApiService) : LoadForecastRepository {
-    override fun execute(): Single<Forecast> {
-       return apiService.getForecast()
+    override fun execute(): ApiService {
+       return apiService
     }
 
 }

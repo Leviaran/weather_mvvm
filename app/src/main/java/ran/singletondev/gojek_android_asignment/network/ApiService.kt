@@ -4,6 +4,7 @@ import io.reactivex.Observable
 import io.reactivex.Single
 import ran.singletondev.gojek_android_asignment.common.domain.model.Forecast
 import retrofit2.http.GET
+import retrofit2.http.Query
 
 /**
  * Created by ran on 5/18/18.
@@ -12,6 +13,10 @@ import retrofit2.http.GET
 const val apiBaseUrl : String = "https://api.apixu.com/"
 
 interface ApiService {
-    @GET("v1/forecast.json?key=f4c0e1eecb164304b16200950181705&q=Paris&days=5")
-    fun getForecast() : Single<Forecast>
+    @GET("v1/forecast.json")
+    fun getForecast(
+            @Query("key") key : String,
+            @Query("q") q : String,
+            @Query("days") days : Int
+    ) : Single<Forecast>
 }

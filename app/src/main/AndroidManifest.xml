@@ -23,7 +23,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyA2F8y1UVDquAYpwS1DM72lHfaVTpD5SH0" />
 
-        <activity android:name=".splash.AddressListActivity">
+        <activity android:name=".dashboard.ForecastActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

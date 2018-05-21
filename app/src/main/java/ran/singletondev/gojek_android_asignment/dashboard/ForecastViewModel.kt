@@ -20,10 +20,20 @@ import com.google.android.gms.location.LocationRequest
 import android.Manifest.permission
 import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.app.Activity
+import android.content.Intent
 import android.support.v4.app.ActivityCompat
 import android.content.pm.PackageManager
+import android.location.Geocoder
+import android.location.Location
+import android.os.Bundle
+import android.os.Handler
+import android.os.ResultReceiver
+import android.widget.Toast
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
+import ran.singletondev.gojek_android_asignment.BuildConfig
+import ran.singletondev.gojek_android_asignment.splash.GetAddressIntentService
+import ran.singletondev.gojek_android_asignment.splash.SplashActivity
 import timber.log.Timber
 
 
@@ -46,13 +56,13 @@ class ForecastViewModel @Inject constructor (
         compositeDisposable.clear()
     }
 
-    fun loadDataForecast() = loadForecast(forecaseInteractor)
+    fun loadDataForecast(location : String) = loadForecast(forecaseInteractor, location)
 
     fun response () :MutableLiveData<Response> = response
 
-    fun loadForecast(forecastUseCase: ForecastUseCase){
+    fun loadForecast(forecastUseCase: ForecastUseCase, location : String){
         compositeDisposable.add(
-                forecastUseCase.getForecast()
+                forecastUseCase.getForecast().getForecast(BuildConfig.ApixKey,location,5)
                         .subscribeOn(schedulersFacade.io())
                         .observeOn(schedulersFacade.ui())
                         .doOnSubscribe { response.value = Response.loading() }
@@ -62,5 +72,39 @@ class ForecastViewModel @Inject constructor (
         )
     }
 
+    fun startLocationUpdates(context: Context,fusedLocationProviderClient: FusedLocationProviderClient, localCallback: LocationCallback) {
+        if (ContextCompat.checkSelfPermission(context,
+                        Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(context as Activity,
+                    arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                    LOCATION_PERMISSION_REQUEST_CODE)
+        } else {
+            val locationRequest = LocationRequest()
+            locationRequest.interval = 2000
+            locationRequest.fastestInterval = 1000
+            locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
+
+
+            fusedLocationProviderClient.requestLocationUpdates(locationRequest,
+                    localCallback,
+                    null)
+        }
+    }
+
+    fun getAddress(context: Context, addressResultReceiver : ForecastActivity.LocationAddressResultReceiver, currentLocation : Location) {
+        if (!Geocoder.isPresent()) {
+            Toast.makeText(context,
+                    "Can't find current address, ",
+                    Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val intent = Intent(context, GetAddressIntentService::class.java)
+        intent.putExtra("add_receiver", addressResultReceiver)
+        intent.putExtra("add_location", currentLocation)
+        context.startService(intent)
+    }
+
 
 }
+

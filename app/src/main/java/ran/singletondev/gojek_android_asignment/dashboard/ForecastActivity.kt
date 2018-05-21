@@ -81,6 +81,16 @@ class ForecastActivity : AppCompatActivity() {
 
     private lateinit var bottomSheetBehavior: BottomSheetBehavior<View>
 
+    private lateinit var addressResultReceiver: LocationAddressResultReceiver
+
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+
+    private lateinit var currentLocation: Location
+
+    private lateinit var locationCallback: LocationCallback
+
+    private var flag : Boolean = true
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -95,19 +105,53 @@ class ForecastActivity : AppCompatActivity() {
         var regularTypeface = ResourcesCompat.getFont(this, R.font.roboto_regular)
         var blackTypeface = ResourcesCompat.getFont(this, R.font.roboto_black)
 
+
+
+        addressResultReceiver = LocationAddressResultReceiver(Handler())
+
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
+        locationCallback = object : LocationCallback() {
+            override fun onLocationResult(locationResult: LocationResult?) {
+                currentLocation = locationResult!!.locations[0]
+                forecastViewModel.getAddress(this@ForecastActivity, addressResultReceiver,currentLocation)
+            }
+        }
+
+        forecastViewModel = ViewModelProviders.of(this, forecastViewModelFactory).get(ForecastViewModel::class.java)
+
+        forecastViewModel.response().observe(this, Observer { response -> processResponse(response) })
+
+        forecastViewModel.startLocationUpdates(this,fusedLocationClient, locationCallback)
+
+
+
         textError.typeface = thinTypeface
 
         textBigTemp.typeface = blackTypeface
 
         textLocation.typeface = thinTypeface
 
-        forecastViewModel = ViewModelProviders.of(this, forecastViewModelFactory).get(ForecastViewModel::class.java)
-
-        forecastViewModel.response().observe(this, Observer { response -> processResponse(response) })
-
-        forecastViewModel.loadDataForecast()
 
 
+//        forecastViewModel.loadDataForecast()
+
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+
+        when (requestCode) {
+            LOCATION_PERMISSION_REQUEST_CODE -> {
+                if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Timber.e("is triggered2")
+                    forecastViewModel.startLocationUpdates(this@ForecastActivity,fusedLocationClient,locationCallback)
+                } else {
+                    Toast.makeText(this, "Location permission not granted, " + "restart the app if you want the feature",
+                            Toast.LENGTH_SHORT).show()
+                }
+                return
+            }
+        }
     }
 
     private fun processResponse(response: Response?) {
@@ -167,7 +211,11 @@ class ForecastActivity : AppCompatActivity() {
 
     @OnClick(R.id.refresh_btn)
     fun refreshBtnClicked(){
-        forecastViewModel.loadDataForecast()
+//        forecastViewModel.loadDataForecast()
+
+        val intent = intent
+        finish()
+        startActivity(intent)
     }
 
     fun loadingView(){
@@ -211,4 +259,33 @@ class ForecastActivity : AppCompatActivity() {
         }
     }
 
+    inner class LocationAddressResultReceiver internal constructor(handler: Handler) : ResultReceiver(handler) {
+
+        override fun onReceiveResult(resultCode: Int, resultData: Bundle) {
+
+            if (resultCode == 0) {
+                forecastViewModel.getAddress(this@ForecastActivity,addressResultReceiver,currentLocation)
+            }
+
+            if (resultCode == 1) {
+                Timber.e("address not found")
+            }
+
+            val currentAdd = resultData.getString("address_result")
+            forecastViewModel.loadDataForecast(currentAdd)
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+//
+    }
+
+    override fun onPause() {
+        super.onPause()
+        fusedLocationClient.removeLocationUpdates(locationCallback)
+    }
+
+
 }
+
