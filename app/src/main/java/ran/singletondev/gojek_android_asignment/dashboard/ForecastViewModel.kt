@@ -39,8 +39,16 @@ import timber.log.Timber
 
 /**
  * Created by ran on 5/18/18.
+ * Email in randy.arba@gmail.com
+ * Github in https://github.com/Leviaran
+ * Publication in https://medium.com/@randy.arba
  */
 
+/**
+ * class for Viewmodel extends with Android Architecture Component MVVM architecture
+ * @param forecaseInteractor
+ * @param schedulerFacade
+ */
 const val LOCATION_PERMISSION_REQUEST_CODE = 2
 
 class ForecastViewModel @Inject constructor (
@@ -52,14 +60,27 @@ class ForecastViewModel @Inject constructor (
 
     private val compositeDisposable = CompositeDisposable()
 
+
+    /**
+     * ViewHole onCleared with observable onClear
+     */
     override fun onCleared() {
         compositeDisposable.clear()
     }
 
+    /**
+     * attach in activity to trigger loaddata api service
+     */
     fun loadDataForecast(location : String) = loadForecast(forecaseInteractor, location)
 
+    /**
+     * MutableLiveData with generic Response
+     */
     fun response () :MutableLiveData<Response> = response
 
+    /**
+     * with RxJava make flowable api service and turn into subscriber faucet by Response Status Data, Error, and Loading
+     */
     fun loadForecast(forecastUseCase: ForecastUseCase, location : String){
         compositeDisposable.add(
                 forecastUseCase.getForecast().getForecast(BuildConfig.ApixKey,location,5)
@@ -72,6 +93,9 @@ class ForecastViewModel @Inject constructor (
         )
     }
 
+    /**
+     * trigger locate of startlocation service in Google Service
+     */
     fun startLocationUpdates(context: Context,fusedLocationProviderClient: FusedLocationProviderClient, localCallback: LocationCallback) {
         if (ContextCompat.checkSelfPermission(context,
                         Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -91,6 +115,9 @@ class ForecastViewModel @Inject constructor (
         }
     }
 
+    /**
+     * get GeoCoder to find Address places
+     */
     fun getAddress(context: Context, addressResultReceiver : ForecastActivity.LocationAddressResultReceiver, currentLocation : Location) {
         if (!Geocoder.isPresent()) {
             Toast.makeText(context,

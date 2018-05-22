@@ -7,8 +7,14 @@ import javax.inject.Inject
 
 /**
  * Created by ran on 5/18/18.
+ * Email in randy.arba@gmail.com
+ * Github in https://github.com/Leviaran
+ * Publication in https://medium.com/@randy.arba
  */
 
+/**
+ * to create static access global typeface
+ */
 class Utils (context: Context) {
     var thinTypeface = ResourcesCompat.getFont(context, R.font.roboto_thin)
     var regularTypeface = ResourcesCompat.getFont(context, R.font.roboto_regular)

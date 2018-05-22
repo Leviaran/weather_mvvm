@@ -19,8 +19,17 @@ import timber.log.Timber
 
 /**
  * Created by ran on 5/18/18.
+ * Email in randy.arba@gmail.com
+ * Github in https://github.com/Leviaran
+ * Publication in https://medium.com/@randy.arba
  */
 
+/**
+ * create class RecyclerAdapter to visualize bottomsheet
+ * @param context
+ * @param list
+ *
+ */
 class RecyclerAdapter (context: Context, var list : List<ForecastDay>?) : RecyclerView.Adapter<RecyclerAdapter.ViewHolder>() {
 
 

@@ -4,15 +4,20 @@ import android.annotation.SuppressLint
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.location.Location
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.os.ResultReceiver
+import android.provider.Settings
 import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.content.res.ResourcesCompat
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
@@ -30,6 +35,7 @@ import ran.singletondev.gojek_android_asignment.dashboard.common.Utils
 import timber.log.Timber
 import javax.inject.Inject
 import android.support.v7.widget.DividerItemDecoration
+import android.text.TextUtils
 import android.widget.*
 import butterknife.OnClick
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -44,6 +50,9 @@ import java.util.concurrent.TimeUnit
 
 /**
  * Created by ran on 5/18/18.
+ * Email in randy.arba@gmail.com
+ * Github in https://github.com/Leviaran
+ * Publication in https://medium.com/@randy.arba
  */
 
 class ForecastActivity : AppCompatActivity() {
@@ -91,6 +100,8 @@ class ForecastActivity : AppCompatActivity() {
 
     private var flag : Boolean = true
 
+    private lateinit var alertDialog : AlertDialog.Builder
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -133,11 +144,33 @@ class ForecastActivity : AppCompatActivity() {
         textLocation.typeface = thinTypeface
 
 
+        if (!isLocationEnabled(this)){
+            createAlertDialog()
+        }
 
-//        forecastViewModel.loadDataForecast()
 
     }
 
+    fun createAlertDialog(){
+        alertDialog = AlertDialog.Builder(this)
+        alertDialog.setMessage("Your GPS is not activate, please activate to get current weather location")
+        alertDialog.setCancelable(true)
+
+        alertDialog.setPositiveButton("Yes", object : DialogInterface.OnClickListener{
+            override fun onClick(dialog: DialogInterface?, which: Int) {
+                dialog?.cancel()
+                finish()
+            }
+        })
+
+        var alertDialogBuild = alertDialog.create()
+        alertDialogBuild.show()
+
+    }
+
+    /**
+     * check request Permission on devices
+     */
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
 
         when (requestCode) {
@@ -176,6 +209,10 @@ class ForecastActivity : AppCompatActivity() {
 
         insertIntoRecycler(forecast)
         insertIntoMainUI(forecast)
+
+        /**
+         * make fake animation in Bottom sheet
+         */
 
         Observable.just("Fake animation")
                 .observeOn(AndroidSchedulers.mainThread())
@@ -259,6 +296,32 @@ class ForecastActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Check if devices is turn Gps on or not
+     */
+    fun isLocationEnabled(context: Context): Boolean {
+        var locationMode = 0
+        val locationProviders: String
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            try {
+                locationMode = Settings.Secure.getInt(context.getContentResolver(), Settings.Secure.LOCATION_MODE)
+
+            } catch (e: Settings.SettingNotFoundException) {
+                e.printStackTrace()
+                return false
+            }
+
+            return locationMode != Settings.Secure.LOCATION_MODE_OFF
+
+        } else {
+            locationProviders = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED)
+            return !TextUtils.isEmpty(locationProviders)
+        }
+
+
+    }
+
     inner class LocationAddressResultReceiver internal constructor(handler: Handler) : ResultReceiver(handler) {
 
         override fun onReceiveResult(resultCode: Int, resultData: Bundle) {
@@ -272,7 +335,10 @@ class ForecastActivity : AppCompatActivity() {
             }
 
             val currentAdd = resultData.getString("address_result")
-            forecastViewModel.loadDataForecast(currentAdd)
+            if (flag){
+                forecastViewModel.loadDataForecast(currentAdd)
+                flag = false
+            }
         }
     }
 
