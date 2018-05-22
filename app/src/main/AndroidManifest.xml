@@ -32,7 +32,7 @@
         </activity>
 
         <service
-            android:name=".splash.GetAddressIntentService"
+            android:name=".services.GetAddressIntentService"
             android:exported="false" />
 
 

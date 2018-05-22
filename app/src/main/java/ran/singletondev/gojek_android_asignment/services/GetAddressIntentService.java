@@ -1,4 +1,4 @@
-package ran.singletondev.gojek_android_asignment.splash;
+package ran.singletondev.gojek_android_asignment.services;
 
 import android.app.IntentService;
 import android.content.Intent;
