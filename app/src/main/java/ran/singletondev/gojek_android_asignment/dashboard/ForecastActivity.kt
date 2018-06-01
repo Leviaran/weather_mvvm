@@ -1,14 +1,10 @@
 package ran.singletondev.gojek_android_asignment.dashboard
 
-import android.annotation.SuppressLint
 import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Context
 import android.content.DialogInterface
-import android.content.Intent
 import android.content.pm.PackageManager
-import android.location.Geocoder
 import android.location.Location
 import android.os.Build
 import android.os.Bundle
@@ -19,33 +15,32 @@ import android.support.design.widget.BottomSheetBehavior
 import android.support.v4.content.res.ResourcesCompat
 import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.DividerItemDecoration
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
-import android.util.Log
+import android.text.TextUtils
 import android.view.View
+import android.widget.LinearLayout
+import android.widget.ProgressBar
+import android.widget.TextView
+import android.widget.Toast
 import butterknife.BindView
 import butterknife.ButterKnife
-import dagger.android.AndroidInjection
-import ran.singletondev.gojek_android_asignment.R
-import ran.singletondev.gojek_android_asignment.common.domain.model.Forecast
-import ran.singletondev.gojek_android_asignment.common.viewmodel.Response
-import ran.singletondev.gojek_android_asignment.common.viewmodel.Status
-import ran.singletondev.gojek_android_asignment.dashboard.adapter.RecyclerAdapter
-import ran.singletondev.gojek_android_asignment.dashboard.common.Utils
-import timber.log.Timber
-import javax.inject.Inject
-import android.support.v7.widget.DividerItemDecoration
-import android.text.TextUtils
-import android.widget.*
 import butterknife.OnClick
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationCallback
 import com.google.android.gms.location.LocationResult
 import com.google.android.gms.location.LocationServices
+import dagger.android.AndroidInjection
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import ran.singletondev.gojek_android_asignment.R
+import ran.singletondev.gojek_android_asignment.common.domain.model.Forecast
+import ran.singletondev.gojek_android_asignment.common.viewmodel.Response
+import ran.singletondev.gojek_android_asignment.dashboard.adapter.RecyclerAdapter
+import timber.log.Timber
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
 
 /**

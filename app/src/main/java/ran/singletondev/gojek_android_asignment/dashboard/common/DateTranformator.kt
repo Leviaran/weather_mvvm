@@ -1,6 +1,5 @@
 package ran.singletondev.gojek_android_asignment.dashboard.common
 
-import android.util.Log
 import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.*

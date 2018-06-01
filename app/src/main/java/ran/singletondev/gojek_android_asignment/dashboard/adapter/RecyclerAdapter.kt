@@ -2,16 +2,12 @@ package ran.singletondev.gojek_android_asignment.dashboard.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Typeface
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import butterknife.BindView
-import kotlinx.android.synthetic.main.item_recycler.view.*
 import ran.singletondev.gojek_android_asignment.R
-import ran.singletondev.gojek_android_asignment.common.domain.model.Forecast
 import ran.singletondev.gojek_android_asignment.common.domain.model.ForecastDay
 import ran.singletondev.gojek_android_asignment.dashboard.common.DateTransformator
 import ran.singletondev.gojek_android_asignment.dashboard.common.Utils

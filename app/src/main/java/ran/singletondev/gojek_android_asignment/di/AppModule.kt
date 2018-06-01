@@ -4,7 +4,6 @@ import android.content.Context
 import dagger.Module
 import dagger.Provides
 import ran.singletondev.gojek_android_asignment.App
-import javax.inject.Singleton
 
 /**
  * Created by ran on 5/18/18.

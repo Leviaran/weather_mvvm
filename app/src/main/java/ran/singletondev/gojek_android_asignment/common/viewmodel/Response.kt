@@ -1,7 +1,5 @@
 package ran.singletondev.gojek_android_asignment.common.viewmodel
 
-import android.support.annotation.NonNull
-import android.support.annotation.Nullable
 import ran.singletondev.gojek_android_asignment.common.domain.model.Forecast
 
 /**

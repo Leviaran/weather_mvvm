@@ -1,6 +1,5 @@
 package ran.singletondev.gojek_android_asignment.network
 
-import io.reactivex.Observable
 import io.reactivex.Single
 import ran.singletondev.gojek_android_asignment.common.domain.model.Forecast
 import retrofit2.http.GET

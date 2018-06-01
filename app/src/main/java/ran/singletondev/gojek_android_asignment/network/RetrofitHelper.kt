@@ -1,9 +1,6 @@
 package ran.singletondev.gojek_android_asignment.network
 
 import okhttp3.OkHttpClient
-import org.reactivestreams.Subscriber
-import ran.singletondev.gojek_android_asignment.common.domain.model.Forecast
-import ran.singletondev.gojek_android_asignment.rx.SchedulersFacade
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory

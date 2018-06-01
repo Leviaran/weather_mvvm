@@ -1,28 +1,28 @@
 package ran.singletondev.gojek_android_asignment.dashboard
 
 import android.Manifest
+import android.app.Activity
 import android.arch.lifecycle.MutableLiveData
 import android.arch.lifecycle.ViewModel
 import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
+import android.location.Geocoder
+import android.location.Location
+import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
+import android.widget.Toast
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationCallback
+import com.google.android.gms.location.LocationRequest
 import io.reactivex.disposables.CompositeDisposable
+import ran.singletondev.gojek_android_asignment.BuildConfig
 import ran.singletondev.gojek_android_asignment.common.domain.interactor.ForecastInteractor
 import ran.singletondev.gojek_android_asignment.common.domain.interactor.ForecastUseCase
 import ran.singletondev.gojek_android_asignment.common.viewmodel.Response
 import ran.singletondev.gojek_android_asignment.rx.SchedulersFacade
-import javax.inject.Inject
-import com.google.android.gms.location.LocationRequest
-import android.app.Activity
-import android.content.Intent
-import android.support.v4.app.ActivityCompat
-import android.content.pm.PackageManager
-import android.location.Geocoder
-import android.location.Location
-import android.widget.Toast
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationCallback
-import ran.singletondev.gojek_android_asignment.BuildConfig
 import ran.singletondev.gojek_android_asignment.services.GetAddressIntentService
+import javax.inject.Inject
 
 
 /**

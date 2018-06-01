@@ -1,6 +1,5 @@
 package ran.singletondev.gojek_android_asignment.common.domain.model
 
-import io.reactivex.Single
 import ran.singletondev.gojek_android_asignment.network.ApiService
 import javax.inject.Inject
 

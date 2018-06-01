@@ -1,26 +1,22 @@
 package ran.singletondev.gojek_android_asignment
 
 import android.arch.lifecycle.MutableLiveData
-import io.reactivex.Single
 import org.junit.Before
 import org.junit.BeforeClass
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.mockito.InjectMocks
-import org.mockito.Mock
-import org.mockito.Mockito.*
+import org.mockito.Mockito.mock
+import org.mockito.Mockito.verify
 import org.mockito.junit.MockitoJUnit
-import ran.singletondev.gojek_android_asignment.common.domain.interactor.ForecastInteractor
-import ran.singletondev.gojek_android_asignment.network.ApiService
-import javax.inject.Inject
 import org.mockito.junit.MockitoJUnitRunner
-import ran.singletondev.gojek_android_asignment.common.domain.model.Forecast
+import ran.singletondev.gojek_android_asignment.common.domain.interactor.ForecastInteractor
 import ran.singletondev.gojek_android_asignment.common.domain.model.LoadForecastDownloader
 import ran.singletondev.gojek_android_asignment.common.domain.model.LoadForecastRepository
 import ran.singletondev.gojek_android_asignment.common.viewmodel.Response
 import ran.singletondev.gojek_android_asignment.dashboard.ForecastActivity
 import ran.singletondev.gojek_android_asignment.dashboard.ForecastViewModel
+import ran.singletondev.gojek_android_asignment.network.ApiService
 import ran.singletondev.gojek_android_asignment.rx.SchedulersFacade
 
 
