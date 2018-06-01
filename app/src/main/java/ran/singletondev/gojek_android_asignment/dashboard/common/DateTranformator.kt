@@ -17,18 +17,29 @@ import java.util.*
  * create class DateTranformator to tranform Date String to String Date day by Locale Indonesia
  *
  */
-class DateTranformator {
-    companion object {
-        fun convertToDay(date : String?) : String{
+//class DateTranformator {
+//    companion object {
+//        fun convertToDay(date : String?) : String{
+//
+//            var sdf = SimpleDateFormat("yyyy-MM-dd")
+//            var currentDate = sdf.parse(date)
+//
+//            val dateFormat = SimpleDateFormat("EEEE", Locale("id","ID"))
+//            val dates = dateFormat.format(currentDate)
+//            Timber.e(dates.toString())
+//
+//            return dates.toString()
+//        }
+//    }
+//}
 
-            var sdf = SimpleDateFormat("yyyy-MM-dd")
-            var currentDate = sdf.parse(date)
+fun String.DateTransformator() : String{
+    val sdf = SimpleDateFormat("yyyy-MM-dd")
+    val currentDate = sdf.parse(this)
 
-            val dateFormat = SimpleDateFormat("EEEE", Locale("id","ID"))
-            val dates = dateFormat.format(currentDate)
-            Timber.e(dates.toString())
+    val dateFormat = SimpleDateFormat("EEEE", Locale("id","ID"))
+    val dates = dateFormat.format(currentDate)
+    Timber.e(dates.toString())
 
-            return dates.toString()
-        }
-    }
+    return dates.toString()
 }

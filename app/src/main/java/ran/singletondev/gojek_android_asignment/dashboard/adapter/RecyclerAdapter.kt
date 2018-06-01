@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.item_recycler.view.*
 import ran.singletondev.gojek_android_asignment.R
 import ran.singletondev.gojek_android_asignment.common.domain.model.Forecast
 import ran.singletondev.gojek_android_asignment.common.domain.model.ForecastDay
-import ran.singletondev.gojek_android_asignment.dashboard.common.DateTranformator
+import ran.singletondev.gojek_android_asignment.dashboard.common.DateTransformator
 import ran.singletondev.gojek_android_asignment.dashboard.common.Utils
 import timber.log.Timber
 
@@ -53,7 +53,8 @@ class RecyclerAdapter (context: Context, var list : List<ForecastDay>?) : Recycl
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.txtDay.text = DateTranformator.convertToDay(list?.get(position)?.date)
+//        holder.txtDay.text = DateTranformator.convertToDay(list?.get(position)?.date)
+        holder.txtDay.text = list?.get(position)?.date?.DateTransformator()
         holder.txtTemp.text = "${list?.get(position)?.day?.avgtemp_c}°"
     }
 
