@@ -18,17 +18,24 @@ import ran.singletondev.gojek_android_asignment.common.domain.model.Forecast
  * @param data
  * @param error
  */
-class Response constructor(val status : Status,
-                                   @Nullable var data : Forecast?,
-                                   @Nullable var error : Throwable?){
+//class Response constructor(val status : Status,
+//                                   @Nullable var data : Forecast?,
+//                                   @Nullable var error : Throwable?){
+//
+//    companion object {
+//
+//        fun loading() : Response = Response(Status.LOADING, null, null)
+//
+//        fun success(@NonNull data : Forecast?) : Response = Response(Status.SUCCESS, data, null)
+//
+//        fun error(@NonNull error: Throwable?) : Response = Response(Status.ERROR, null, error)
+//    }
+//
+//}
 
-    companion object {
-
-        fun loading() : Response = Response(Status.LOADING, null, null)
-
-        fun success(@NonNull data : Forecast?) : Response = Response(Status.SUCCESS, data, null)
-
-        fun error(@NonNull error: Throwable?) : Response = Response(Status.ERROR, null, error)
-    }
-
+sealed class Response {
+    object Loading : Response()
+    data class Success (val data : Forecast?) : Response()
+    object Error : Response()
 }
+

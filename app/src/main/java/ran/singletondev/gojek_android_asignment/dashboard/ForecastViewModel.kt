@@ -74,12 +74,13 @@ class ForecastViewModel @Inject constructor (
                 forecastUseCase.getForecast().getForecast(BuildConfig.ApixKey,location,5)
                         .subscribeOn(schedulersFacade.io())
                         .observeOn(schedulersFacade.ui())
-                        .doOnSubscribe { response.value = Response.loading() }
-                        .subscribe({forecast -> response.value = Response.success(forecast)}){
-                            throwable -> response.value = Response.error(throwable)
+                        .doOnSubscribe { Response.Loading }
+                        .subscribe({forecast -> Response.Success(forecast)}){
+                            throwable -> Response.Error
                         }
         )
     }
+
 
     /**
      * trigger locate of startlocation service in Google Service

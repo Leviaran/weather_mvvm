@@ -131,7 +131,7 @@ class ForecastActivity : AppCompatActivity() {
 
         forecastViewModel = ViewModelProviders.of(this, forecastViewModelFactory).get(ForecastViewModel::class.java)
 
-        forecastViewModel.response().observe(this, Observer { response -> processResponse(response) })
+        forecastViewModel.response().observe(this, Observer { response -> execute(response!!) })
 
         forecastViewModel.startLocationUpdates(this,fusedLocationClient, locationCallback)
 
@@ -187,15 +187,23 @@ class ForecastActivity : AppCompatActivity() {
         }
     }
 
-    private fun processResponse(response: Response?) {
-        when (response?.status) {
-            Status.LOADING -> renderLoadingState()
+//    private fun processResponse(response: Response?) {
+//        when (response?.status) {
+//            Status.LOADING -> renderLoadingState()
+//
+//            Status.SUCCESS -> renderDataState(response.data)
+//
+//            Status.ERROR -> renderErrorState(response.error)
+//        }
+//    }
 
-            Status.SUCCESS -> renderDataState(response.data)
-
-            Status.ERROR -> renderErrorState(response.error)
-        }
+    private fun execute(response : Response) = when (response) {
+        is Response.Loading -> renderLoadingState()
+        is Response.Success -> renderDataState(response.data)
+        is Response.Error -> renderErrorState()
     }
+
+
 
     private fun renderLoadingState() {
         Timber.e("Loading")
@@ -222,8 +230,7 @@ class ForecastActivity : AppCompatActivity() {
 
     }
 
-    private fun renderErrorState(throwable: Throwable?) {
-        Timber.e(throwable)
+    private fun renderErrorState() {
         Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
         errorView()
     }
