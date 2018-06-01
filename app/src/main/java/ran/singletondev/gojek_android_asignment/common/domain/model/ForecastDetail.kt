@@ -11,5 +11,5 @@ import com.squareup.moshi.Json
 
 
 class ForecastDetail (
-        @Json(name = "forecastday") var forecastday : List<ForecastDay>
+        @Json(name = "forecastday") val forecastday : List<ForecastDay>
 )

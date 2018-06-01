@@ -11,7 +11,7 @@ import com.squareup.moshi.Json
 
 
 class Day (
-        @Json(name = "maxtemp_c") var maxtemp_c : String,
-        @Json(name = "mintemp_c") var mintemp_c : String,
-        @Json(name = "avgtemp_c") var avgtemp_c : String
+        @Json(name = "maxtemp_c") val maxtemp_c : String,
+        @Json(name = "mintemp_c") val mintemp_c : String,
+        @Json(name = "avgtemp_c") val avgtemp_c : String
 )

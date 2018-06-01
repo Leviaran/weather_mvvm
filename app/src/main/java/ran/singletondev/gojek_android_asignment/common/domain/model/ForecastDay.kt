@@ -12,7 +12,7 @@ import com.squareup.moshi.Json
 
 
 class ForecastDay (
-        @Json(name = "date") var date : String,
-        @Json(name = "date_epoch") var date_epoch : String,
-        @Json(name = "day") var day : Day
+        @Json(name = "date") val date : String,
+        @Json(name = "date_epoch") val date_epoch : String,
+        @Json(name = "day") val day : Day
 )

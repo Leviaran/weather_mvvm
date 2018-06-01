@@ -13,7 +13,7 @@ import io.reactivex.Single
 
 
 class Forecast (
-        @Json(name = "location") var location : Location,
-        @Json(name = "current") var current: Current,
-        @Json(name = "forecast") var forecast: ForecastDetail
+        @Json(name = "location") val location : Location,
+        @Json(name = "current") val current: Current,
+        @Json(name = "forecast") val forecast: ForecastDetail
 )

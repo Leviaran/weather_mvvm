@@ -10,12 +10,12 @@ import com.squareup.moshi.Json
  */
 
 class Location (
-        @Json(name = "name") var name : String,
-        @Json(name = "region") var region : String,
-        @Json(name = "country") var country : String,
-        @Json(name = "lat") var lat : String,
-        @Json(name = "lon") var lon : String,
-        @Json(name = "tz_id") var tz_id : String,
-        @Json(name = "localtime_epoch") var localtime_epoch : String,
-        @Json(name = "localtime") var localtime : String
+        @Json(name = "name") val name : String,
+        @Json(name = "region") val region : String,
+        @Json(name = "country") val country : String,
+        @Json(name = "lat") val lat : String,
+        @Json(name = "lon") val lon : String,
+        @Json(name = "tz_id") val tz_id : String,
+        @Json(name = "localtime_epoch") val localtime_epoch : String,
+        @Json(name = "localtime") val localtime : String
 )

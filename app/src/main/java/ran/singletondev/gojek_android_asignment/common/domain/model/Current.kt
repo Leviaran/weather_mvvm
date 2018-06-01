@@ -11,13 +11,13 @@ import com.squareup.moshi.Json
 
 
 class Current (
-        @Json(name = "last_updated_epoch") var last_updated_epoch : String,
-        @Json(name = "last_updated") var last_updated : String,
-        @Json(name = "temp_c") var temp_c : String,
-        @Json(name = "temp_f") var temp_f : String,
-        @Json(name = "is_day") var is_day : String,
-        @Json(name = "wind_mph") var wind_mph : String,
-        @Json(name = "wind_kph") var wind_kph : String,
-        @Json(name = "wind_degree") var wind_degree : String,
-        @Json(name = "wind_dir") var wind_dir : String
+        @Json(name = "last_updated_epoch") val last_updated_epoch : String,
+        @Json(name = "last_updated") val last_updated : String,
+        @Json(name = "temp_c") val temp_c : String,
+        @Json(name = "temp_f") val temp_f : String,
+        @Json(name = "is_day") val is_day : String,
+        @Json(name = "wind_mph") val wind_mph : String,
+        @Json(name = "wind_kph") val wind_kph : String,
+        @Json(name = "wind_degree") val wind_degree : String,
+        @Json(name = "wind_dir") val wind_dir : String
 )

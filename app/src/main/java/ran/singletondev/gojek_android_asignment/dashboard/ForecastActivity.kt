@@ -201,6 +201,7 @@ class ForecastActivity : AppCompatActivity() {
         is Response.Loading -> renderLoadingState()
         is Response.Success -> renderDataState(response.data)
         is Response.Error -> renderErrorState()
+
     }
 
 
@@ -231,6 +232,7 @@ class ForecastActivity : AppCompatActivity() {
     }
 
     private fun renderErrorState() {
+        Timber.e("Errror")
         Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
         errorView()
     }
@@ -343,6 +345,7 @@ class ForecastActivity : AppCompatActivity() {
 
             val currentAdd = resultData.getString("address_result")
             if (flag){
+                Timber.e(currentAdd);
                 forecastViewModel.loadDataForecast(currentAdd)
                 flag = false
             }

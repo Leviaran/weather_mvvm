@@ -74,9 +74,9 @@ class ForecastViewModel @Inject constructor (
                 forecastUseCase.getForecast().getForecast(BuildConfig.ApixKey,location,5)
                         .subscribeOn(schedulersFacade.io())
                         .observeOn(schedulersFacade.ui())
-                        .doOnSubscribe { Response.Loading }
-                        .subscribe({forecast -> Response.Success(forecast)}){
-                            throwable -> Response.Error
+                        .doOnSubscribe { response.value = Response.Loading }
+                        .subscribe({forecast -> response.value =  Response.Success(forecast)}){
+                            throwable -> response.value = Response.Error
                         }
         )
     }

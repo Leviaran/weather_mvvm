@@ -13,6 +13,8 @@ import android.util.Log;
 import java.util.List;
 import java.util.Locale;
 
+import timber.log.Timber;
+
 public class GetAddressIntentService extends IntentService {
 
     private static final String IDENTIFIER = "GetAddressIntentService";
@@ -62,40 +64,13 @@ public class GetAddressIntentService extends IntentService {
             sendResultsToReceiver(1, msg);
         } else {
             Address address = addresses.get(0);
-            StringBuffer addressDetails = new StringBuffer();
-
-            addressDetails.append(address.getFeatureName());
-            addressDetails.append("\n");
-
-            addressDetails.append(address.getThoroughfare());
-            addressDetails.append("\n");
-
-            addressDetails.append("Locality: ");
-            addressDetails.append(address.getLocality());
-            addressDetails.append("\n");
-
-            addressDetails.append("County: ");
-            addressDetails.append(address.getSubAdminArea());
-            addressDetails.append("\n");
-
-            addressDetails.append("State: ");
-            addressDetails.append(address.getAdminArea());
-            addressDetails.append("\n");
-
-            addressDetails.append("Country: ");
-            addressDetails.append(address.getCountryName());
-            addressDetails.append("\n");
-
-            addressDetails.append("Postal Code: ");
-            addressDetails.append(address.getPostalCode());
-            addressDetails.append("\n");
-
-            sendResultsToReceiver(2,addressDetails.toString());
+            sendResultsToReceiver(2,address.getLocality());
         }
     }
     //to send results to receiver in the source activity
     private void sendResultsToReceiver(int resultCode, String message) {
         Bundle bundle = new Bundle();
+        Timber.e(message);
         bundle.putString("address_result", message);
         addressResultReceiver.send(resultCode, bundle);
     }
