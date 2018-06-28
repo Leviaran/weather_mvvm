@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ran.singletondev.gojek_android_asignment.MainActivity">
+    tools:context="ran.singletondev.weather_mvvm.ran.singletondev.weather_mvvm.MainActivity">
 
     <FrameLayout
         android:id="@+id/frameLayout"

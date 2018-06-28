@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ran.singletondev.gojek_android_asignment">
+    package="ran.singletondev.weather_mvvm">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <application
-        android:name=".App"
+        android:name="ran.singletondev.weather_mvvm.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -23,7 +23,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyA2F8y1UVDquAYpwS1DM72lHfaVTpD5SH0" />
 
-        <activity android:name=".dashboard.ForecastActivity">
+        <activity android:name="ran.singletondev.weather_mvvm.dashboard.ForecastActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,7 +32,7 @@
         </activity>
 
         <service
-            android:name=".services.GetAddressIntentService"
+            android:name="ran.singletondev.weather_mvvm.services.GetAddressIntentService"
             android:exported="false" />
 
 
